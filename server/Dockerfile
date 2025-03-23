@@ -9,11 +9,12 @@ RUN rm -rf node_modules package-lock.json && npm install --force
 COPY . .
 
 # BCRYPT im Container neu installieren
-# RUN npm rebuild bcrypt --build-from-source
-
 RUN rm -rf node_modules package-lock.json && npm cache clean --force
 RUN npm install bcrypt --build-from-source
 
+RUN chmod +x /app/index.js
+
+
 EXPOSE 8747
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]

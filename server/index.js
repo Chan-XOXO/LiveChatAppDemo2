@@ -15,7 +15,7 @@ dotenv.config();
 
 // Initialisiert die Express-Anwendung und lädt die Umgebungsvariablen
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8747;
 const databaseURL = process.env.DATABASE_URL;
 
 app.set('trust proxy', 1); // Vertraut nur dem ersten Proxy
@@ -40,7 +40,7 @@ app.use(express.json());
 
 //Jedes mal das der Server gestartet wird, gebe diese Meldung
 const server = app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at ${process.env.ORIGIN}:${port}`);
 });
 
 //initialisiert Websockets um die Kommunikation zu ermöglichen

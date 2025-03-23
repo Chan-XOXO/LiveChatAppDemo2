@@ -11,7 +11,7 @@ import User from "my-mongoose-models-for-chatapp/models/UserModel.js";
 import { Redis } from "ioredis";
 import { createShardedAdapter } from "@socket.io/redis-adapter";
 
-
+/*
 export const redisPubClient = new Redis({
   host: process.env.REDIS_HOST || "redis",
   port: process.env.REDIS_PORT || 6379
@@ -21,6 +21,12 @@ export const redisSubClient = new Redis({
   host: process.env.REDIS_HOST || "redis",
   port: process.env.REDIS_PORT || 6379
 });
+
+*/
+
+export const redisPubClient = new Redis(process.env.REDIS_URL)
+
+export const redisSubClient = new Redis(process.env.REDIS_URL)
 
 // Benutzer-Sockets in Redis speichern
 const userSocketMapKey = "userSocketMap";
