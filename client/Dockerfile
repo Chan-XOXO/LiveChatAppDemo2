@@ -19,29 +19,19 @@
 
 # Step 1: Build the app
 # Step 1: Build the frontend using Node
+# Step 1: Build with Node
 FROM node:18-alpine as builder
-
 WORKDIR /app
 
-# Install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy all other frontend files
 COPY . .
-
-# Build the app
 RUN npm run build
 
-# Step 2: Serve the build with NGINX
+# Step 2: Serve with NGINX
 FROM nginx:stable-alpine
-
-# Copy built frontend (from builder stage) to NGINX public folder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Optionally copy custom NGINX config
-# COPY nginx.conf /etc/nginx/nginx.conf
-
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
